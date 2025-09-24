@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Diseño Web</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos personalizados para emular el diseño vintage */
+        body {
+            background-color: #F5F1ED;
+            color: #4A443F;
+            font-family: 'Lora', serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .vintage-accent {
+            color: #C08261;
+        }
+        .vintage-bg-accent {
+            background-color: #C08261;
+        }
+        .vintage-bg-accent-dark {
+            background-color: #A46A55;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #C08261;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #C08261;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        .portfolio-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .flourish {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .flourish::after {
+            content: '✦';
+            font-size: 1.2rem;
+            color: #C08261;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Estilos del Modal */
+        .modal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Contenedor principal -->
+    <div class="container mx-auto px-6 py-8">
+
+        <!-- Header y Navegación -->
+        <header class="flex justify-between items-center mb-16 md:mb-24">
+            <h3 class="text-2xl font-bold">sam & mel</h3>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#inicio" class="nav-link text-lg">Inicio</a>
+                <a href="#portafolio" class="nav-link text-lg">Portfolio</a>
+                <a href="#contacto" class="nav-link text-lg">Contacto</a>
+            </nav>
+        </header>
+
+        <!-- Sección Hero -->
+        <section id="inicio" class="text-center mb-16 md:mb-24">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">Experiencias Digitales</h1>
+            <p class="text-xl md:text-2xl italic flourish">Donde las ideas cobran vida en la web</p>
+            <div class="max-w-3xl mx-auto mt-12 text-lg leading-relaxed">
+                <p>Bienvenido a mi espacio en internet. Un café digital para el alma creativa, donde el diseño se fusiona con la funcionalidad, las ideas se transforman en sitios web memorables y cada línea de código se escribe con intención.</p>
+                <p class="mt-4">Ponete cómodo y explorá algunos de los proyectos en los que tuve el placer de trabajar.</p>
+            </div>
+        </section>
+
+        <!-- Sección Portafolio -->
+        <section id="portafolio">
+            <h2 class="text-center text-4xl font-bold mb-12">Últimos Proyectos</h2>
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Las tarjetas de proyectos se insertarán aquí con JavaScript -->
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contacto" class="mt-16 md:mt-24 max-w-3xl mx-auto text-center p-8 md:p-12 bg-white/20 rounded-lg">
+             <div class="flex justify-center mb-4">
+                <span class="text-3xl">⁂</span>
+             </div>
+            <h2 class="text-3xl font-bold mb-4">Hablemos de tu Proyecto</h2>
+            <p class="mb-8 text-lg">¿Tenés una idea en mente? Me encantaría escucharla. Mandame un mensaje y empecemos a crear algo increíble juntos.</p>
+            <a href="https://wa.me/5491173666512" target="_blank" rel="noopener noreferrer" class="inline-block vintage-bg-accent-dark text-white px-8 py-3 rounded-md hover:bg-[#4A443F] transition-colors font-semibold">
+                Chatear por WhatsApp
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center mt-16 md:mt-24 py-6 border-t border-[#4A443F]/20">
+            <p>&copy; 2025 sam & mel. Creado con dedicación y nostalgia.</p>
+        </footer>
+
+    </div>
+
+    <!-- Modal para mostrar detalles del proyecto -->
+    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 opacity-0 invisible z-50">
+        <div id="modal-content" class="modal-content bg-[#F5F1ED] text-[#4A443F] rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 md:p-10 relative transform scale-95">
+            <button id="close-modal" class="absolute top-4 right-4 text-3xl hover:text-[#C08261] transition-colors">&times;</button>
+            <div>
+                <span id="modal-category" class="inline-block vintage-bg-accent text-white px-3 py-1 text-sm rounded-full mb-4">Categoría</span>
+                <h2 id="modal-title" class="text-4xl font-bold mb-4">Título del Proyecto</h2>
+                <div id="modal-description" class="text-lg leading-relaxed mb-6">
+                    <p>Descripción detallada del proyecto...</p>
+                </div>
+                <a id="modal-link" href="#" target="_blank" class="inline-block vintage-bg-accent-dark text-white px-6 py-3 rounded-md hover:bg-[#4A443F] transition-colors font-semibold">
+                    Visitar Sitio Web &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const projects = [
+                {
+                    title: "Sitio Web para Psicóloga",
+                    category: "Salud y Bienestar",
+                    date: "23 de Septiembre de 2025",
+                    author: "Ornella D'Alicandro",
+                    description: "Diseño y desarrollo de un sitio web profesional, creando un espacio digital cálido, seguro y acogedor para pacientes.",
+                    fullDescription: "Se creó una plataforma web completa para la Lic. Ornella D'Alicandro, enfocada en presentar sus servicios de psicología de manera clara y accesible. El diseño prioriza una navegación intuitiva y una atmósfera de calma y confianza, elementos clave para su área profesional. Se incluyó una sección de contacto optimizada para facilitar la solicitud de turnos.",
+                    liveUrl: "https://www.psicologaornelladalicandro.com.ar/"
+                },
+                {
+                    title: "Sitio Web para Psicóloga",
+                    category: "Salud y Bienestar",
+                    date: "15 de Agosto de 2025",
+                    author: "Melina Najum",
+                    description: "Creación de una presencia online profesional y cercana, ofreciendo un punto de contacto claro y confiable para sus pacientes.",
+                    fullDescription: "Para la Lic. Melina Najum, se desarrolló un sitio web que refleja su enfoque profesional y humano. La estructura fue diseñada para ser limpia y fácil de navegar, permitiendo a los visitantes encontrar información sobre sus servicios y contactarla de forma sencilla. El objetivo principal fue construir un espacio digital que genere confianza y facilite el primer paso para la terapia.",
+                    liveUrl: "https://www.licmelinanajum.com.ar/"
+                },
+            ];
+
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            const modal = document.getElementById('project-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal');
+
+            // Poblar la cuadrícula de proyectos
+            projects.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'portfolio-card cursor-pointer h-full';
+                card.innerHTML = `
+                    <div class="border border-[#4A443F]/20 p-6 rounded-lg h-full flex flex-col bg-white/10 hover:bg-white/20 transition-colors">
+                        <span class="inline-block vintage-bg-accent text-white px-3 py-1 text-sm rounded-full mb-4 self-start">${project.category}</span>
+                        <h3 class="text-2xl font-bold mb-3">${project.title}</h3>
+                        <p class="text-sm mb-4">${project.date} • ${project.author}</p>
+                        <p class="leading-relaxed mb-4 flex-grow">${project.description}</p>
+                        <span data-index="${index}" class="open-modal-btn font-semibold vintage-accent hover:underline self-start">Ver Proyecto &rarr;</span>
+                    </div>
+                `;
+                portfolioGrid.appendChild(card);
+            });
+
+            // Lógica del Modal
+            portfolioGrid.addEventListener('click', function(e) {
+                if (e.target.classList.contains('open-modal-btn')) {
+                    const projectIndex = e.target.getAttribute('data-index');
+                    const projectData = projects[projectIndex];
+                    openModal(projectData);
+                }
+            });
+
+            function openModal(project) {
+                document.getElementById('modal-category').textContent = project.category;
+                document.getElementById('modal-title').textContent = project.title;
+                document.getElementById('modal-description').innerHTML = `<p>${project.fullDescription}</p>`;
+                document.getElementById('modal-link').href = project.liveUrl;
+
+                modal.classList.remove('invisible', 'opacity-0');
+                modalContent.classList.remove('scale-95');
+                document.body.style.overflow = 'hidden'; // Evitar scroll del fondo
+            }
+            
+            function closeModal() {
+                modal.classList.add('opacity-0');
+                modalContent.classList.add('scale-95');
+                setTimeout(() => {
+                   modal.classList.add('invisible');
+                   document.body.style.overflow = 'auto';
+                }, 300);
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !modal.classList.contains('invisible')) {
+                    closeModal();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
