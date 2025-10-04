@@ -13,6 +13,9 @@
     
     <style>
         /* Estilos personalizados para emular el diseño vintage */
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: #F5F1ED;
             color: #4A443F;
@@ -52,13 +55,6 @@
             width: 100%;
             left: 0;
         }
-        .portfolio-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .portfolio-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
         .flourish {
             position: relative;
             display: inline-block;
@@ -74,12 +70,23 @@
             transform: translateX(-50%);
         }
         
-        /* Estilos del Modal */
-        .modal {
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        .modal-content {
+        /* Estilo Botón Flotante Instagram */
+        .instagram-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
             transition: transform 0.3s ease-in-out;
+        }
+        .instagram-float:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -108,11 +115,11 @@
             </div>
         </section>
 
-        <!-- Sección Portafolio -->
+        <!-- Sección Portafolio con Acordeón -->
         <section id="portafolio">
             <h2 class="text-center text-4xl font-bold mb-12">Últimos Proyectos</h2>
-            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                <!-- Las tarjetas de proyectos se insertarán aquí con JavaScript -->
+            <div id="portfolio-accordion" class="max-w-4xl mx-auto space-y-4">
+                <!-- Los items del acordeón se insertarán aquí con JavaScript -->
             </div>
         </section>
 
@@ -135,123 +142,116 @@
 
     </div>
 
-    <!-- Modal para mostrar detalles del proyecto -->
-    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 opacity-0 invisible z-50">
-        <div id="modal-content" class="modal-content bg-[#F5F1ED] text-[#4A443F] rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 md:p-10 relative transform scale-95">
-            <button id="close-modal" class="absolute top-4 right-4 text-3xl hover:text-[#C08261] transition-colors">&times;</button>
-            <div>
-                <span id="modal-category" class="inline-block vintage-bg-accent text-white px-3 py-1 text-sm rounded-full mb-4">Categoría</span>
-                <h2 id="modal-title" class="text-4xl font-bold mb-4">Título del Proyecto</h2>
-                <div id="modal-description" class="text-lg leading-relaxed mb-6">
-                    <p>Descripción detallada del proyecto...</p>
-                </div>
-                <a id="modal-link" href="#" target="_blank" class="inline-block vintage-bg-accent-dark text-white px-6 py-3 rounded-md hover:bg-[#4A443F] transition-colors font-semibold">
-                    Visitar Sitio Web &rarr;
-                </a>
-            </div>
-        </div>
-    </div>
-
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const projects = [
-                {
+                 {
                     title: "Sitio Web para Psicóloga",
-                    category: "Salud y Bienestar",
-                    date: "23 de Septiembre de 2025",
                     author: "Ornella D'Alicandro",
-                    description: "Diseño y desarrollo de un sitio web profesional, creando un espacio digital cálido, seguro y acogedor para pacientes.",
                     fullDescription: "Se creó una plataforma web completa para la Lic. Ornella D'Alicandro, enfocada en presentar sus servicios de psicología de manera clara y accesible. El diseño prioriza una navegación intuitiva y una atmósfera de calma y confianza, elementos clave para su área profesional. Se incluyó una sección de contacto optimizada para facilitar la solicitud de turnos.",
                     liveUrl: "https://www.psicologaornelladalicandro.com.ar/"
                 },
                 {
                     title: "Sitio Web para Psicóloga",
-                    category: "Salud y Bienestar",
-                    date: "15 de Agosto de 2025",
                     author: "Melina Najum",
-                    description: "Creación de una presencia online profesional y cercana, ofreciendo un punto de contacto claro y confiable para sus pacientes.",
                     fullDescription: "Para la Lic. Melina Najum, se desarrolló un sitio web que refleja su enfoque profesional y humano. La estructura fue diseñada para ser limpia y fácil de navegar, permitiendo a los visitantes encontrar información sobre sus servicios y contactarla de forma sencilla. El objetivo principal fue construir un espacio digital que genere confianza y facilite el primer paso para la terapia.",
                     liveUrl: "https://www.licmelinanajum.com.ar/"
                 },
                 {
                     title: "Sitio Web para Psicólogo",
-                    category: "Salud y Bienestar",
-                    date: "01 de Octubre de 2025", // Fecha ficticia, ajusta si tenés la real
                     author: "Rodrigo Panal",
-                    description: "Desarrollo de un sitio web profesional para el Lic. Rodrigo Panal, facilitando el acceso a sus servicios y enfoque terapéutico.",
                     fullDescription: "Se implementó un sitio web completo para el Lic. Rodrigo Panal, diseñado para comunicar eficazmente su propuesta profesional en el ámbito de la psicología. Se buscó un diseño claro y una navegación sencilla para que los pacientes puedan conocer sus especialidades, acceder a recursos y contactarse fácilmente. La plataforma refuerza su presencia digital y profesionalismo.",
                     liveUrl: "https://www.rodrigopanal.com.ar/"
                 },
+                {
+                    title: "Sitio Web para Psicóloga",
+                    author: "Lali Boldrini",
+                    fullDescription: "Se diseñó y desarrolló un sitio web para la Lic. Lali Boldrini con el objetivo de crear una presencia digital profesional y cercana. La web presenta sus servicios, su enfoque terapéutico y facilita un canal de comunicación directo para los interesados en iniciar un proceso de terapia, todo dentro de un diseño que transmite serenidad y confianza.",
+                    liveUrl: "https://www.psicologa-laliboldrini.com.ar/"
+                },
+                {
+                    title: "Sitio Web para Psicólogo y Equipo",
+                    author: "Alejandro Tondelli & Equipo",
+                    fullDescription: "Se desarrolló un sitio web integral para el Lic. Alejandro Tondelli y su equipo. El objetivo fue crear un espacio profesional que no solo presente los perfiles y especialidades de cada terapeuta, sino que también ofrezca un recurso informativo para los visitantes. La web facilita el contacto y la gestión de consultas, consolidando la presencia digital del equipo.",
+                    liveUrl: "https://www.xn--licalejandrotondelli-psiclogo-k3c.com.ar/"
+                },
+                {
+                    title: "Sitio Web para Psicóloga",
+                    author: "Vanesa Bustos",
+                    fullDescription: "Se desarrolló una plataforma web para la Lic. Vanesa Bustos con el fin de crear un espacio digital que refleje su profesionalismo. El sitio presenta de forma clara sus servicios, su enfoque de trabajo y proporciona un canal de contacto directo y accesible para quienes buscan acompañamiento psicológico, fortaleciendo su presencia online.",
+                    liveUrl: "https://www.vanebustospsicologa.com.ar/"
+                },
             ];
 
-            const portfolioGrid = document.getElementById('portfolio-grid');
-            const modal = document.getElementById('project-modal');
-            const modalContent = document.getElementById('modal-content');
-            const closeModalBtn = document.getElementById('close-modal');
+            const portfolioAccordion = document.getElementById('portfolio-accordion');
 
-            // Poblar la cuadrícula de proyectos
-            projects.forEach((project, index) => {
-                const card = document.createElement('div');
-                card.className = 'portfolio-card cursor-pointer h-full';
-                card.innerHTML = `
-                    <div class="border border-[#4A443F]/20 p-6 rounded-lg h-full flex flex-col bg-white/10 hover:bg-white/20 transition-colors">
-                        <span class="inline-block vintage-bg-accent text-white px-3 py-1 text-sm rounded-full mb-4 self-start">${project.category}</span>
-                        <h3 class="text-2xl font-bold mb-3">${project.title}</h3>
-                        <p class="text-sm mb-4">${project.date} • ${project.author}</p>
-                        <p class="leading-relaxed mb-4 flex-grow">${project.description}</p>
-                        <span data-index="${index}" class="open-modal-btn font-semibold vintage-accent hover:underline self-start">Ver Proyecto &rarr;</span>
-                    </div>
-                `;
-                portfolioGrid.appendChild(card);
-            });
+            if (portfolioAccordion) {
+                projects.forEach(project => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'accordion-item border border-[#4A443F]/10 rounded-lg overflow-hidden bg-[#FDFBF8] shadow-sm';
+                    
+                    itemDiv.innerHTML = `
+                        <button class="accordion-toggle w-full flex justify-between items-center text-left p-6 hover:bg-[#4A443F]/5 focus:outline-none transition-colors">
+                            <span class="text-xl font-bold">${project.author}</span>
+                            <span class="accordion-icon text-2xl vintage-accent transform transition-transform duration-300">+</span>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                            <div class="p-6 border-t border-[#4A443F]/10">
+                                <h4 class="text-lg font-bold mb-2 text-[#4A443F]">${project.title}</h4>
+                                <p class="mb-4 text-base leading-relaxed text-[#4A443F]/90">${project.fullDescription}</p>
+                                <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 vintage-bg-accent-dark text-white px-5 py-2 rounded-md hover:bg-[#4A443F] transition-colors font-semibold text-sm">
+                                    Visitar Sitio Web &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    portfolioAccordion.appendChild(itemDiv);
+                });
 
-            // Lógica del Modal
-            portfolioGrid.addEventListener('click', function(e) {
-                if (e.target.classList.contains('open-modal-btn')) {
-                    const projectIndex = e.target.getAttribute('data-index');
-                    const projectData = projects[projectIndex];
-                    openModal(projectData);
-                }
-            });
+                portfolioAccordion.addEventListener('click', (e) => {
+                    const toggleBtn = e.target.closest('.accordion-toggle');
+                    if (!toggleBtn) return;
 
-            function openModal(project) {
-                document.getElementById('modal-category').textContent = project.category;
-                document.getElementById('modal-title').textContent = project.title;
-                document.getElementById('modal-description').innerHTML = `<p>${project.fullDescription}</p>`;
-                document.getElementById('modal-link').href = project.liveUrl;
+                    const currentItem = toggleBtn.closest('.accordion-item');
+                    const content = toggleBtn.nextElementSibling;
+                    const icon = toggleBtn.querySelector('.accordion-icon');
+                    const isExpanded = currentItem.classList.contains('expanded');
 
-                modal.classList.remove('invisible', 'opacity-0');
-                modalContent.classList.remove('scale-95');
-                document.body.style.overflow = 'hidden'; // Evitar scroll del fondo
+                    // Cerrar todos los demás items
+                    const allItems = portfolioAccordion.querySelectorAll('.accordion-item');
+                    allItems.forEach(item => {
+                        if (item !== currentItem) {
+                            item.classList.remove('expanded');
+                            item.querySelector('.accordion-content').style.maxHeight = null;
+                            item.querySelector('.accordion-icon').classList.remove('rotate-45');
+                        }
+                    });
+
+                    // Abrir o cerrar el item actual
+                    if (isExpanded) {
+                        currentItem.classList.remove('expanded');
+                        content.style.maxHeight = null;
+                        icon.classList.remove('rotate-45');
+                    } else {
+                        currentItem.classList.add('expanded');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.classList.add('rotate-45');
+                    }
+                });
             }
-            
-            function closeModal() {
-                modal.classList.add('opacity-0');
-                modalContent.classList.add('scale-95');
-                setTimeout(() => {
-                   modal.classList.add('invisible');
-                   document.body.style.overflow = 'auto';
-                }, 300);
-            }
-
-            closeModalBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && !modal.classList.contains('invisible')) {
-                    closeModal();
-                }
-            });
-
         });
     </script>
+
+    <!-- Botón flotante de Instagram -->
+    <a href="https://www.instagram.com/sam_mel_90/" target="_blank" rel="noopener noreferrer" class="instagram-float shadow-lg">
+        <svg class="w-8 h-8 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+        </svg>
+    </a>
 </body>
 </html>
+
+
 
 
 
