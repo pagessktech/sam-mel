@@ -1,268 +1,516 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Diseño Web</title>
+    <title>sam & mel | Diseño Web</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'luxury-bg': '#FAFAF9',
+                        'luxury-text': '#1C1917',
+                        'luxury-accent': '#9A8C73',
+                        'luxury-muted': '#57534E',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -10px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Estilos personalizados para emular el diseño vintage */
-        html {
-            scroll-behavior: smooth;
-        }
         body {
-            background-color: #F5F1ED;
-            color: #4A443F;
-            font-family: 'Lora', serif;
-        }
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-        .vintage-accent {
-            color: #C08261;
-        }
-        .vintage-bg-accent {
-            background-color: #C08261;
-        }
-        .vintage-bg-accent-dark {
-            background-color: #A46A55;
-        }
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        .nav-link:hover {
-            color: #C08261;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            display: block;
-            margin-top: 5px;
-            right: 0;
-            background: #C08261;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-            left: 0;
-        }
-        .flourish {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-        .flourish::after {
-            content: '✦';
-            font-size: 1.2rem;
-            color: #C08261;
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
+            background-color: #FAFAF9;
+            color: #1C1917;
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 80px; /* Espacio para la barra fija móvil */
         }
         
-        /* Estilo Botón Flotante Instagram */
-        .instagram-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 25px;
-            right: 25px;
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            transition: transform 0.3s ease-in-out;
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+            }
         }
-        .instagram-float:hover {
-            transform: scale(1.1);
+
+        /* Tipografía Premium */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Animaciones de Entrada */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estilos del Acordeón de Lujo */
+        .accordion-item {
+            border-bottom: 1px solid rgba(28, 25, 23, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .accordion-item:first-child {
+            border-top: 1px solid rgba(28, 25, 23, 0.1);
+        }
+        .accordion-item:hover {
+            background-color: rgba(28, 25, 23, 0.02);
+        }
+        .accordion-toggle {
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem 0; /* Ajustado para móvil */
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            transition: color 0.3s ease;
+        }
+        .accordion-toggle:hover {
+            color: #9A8C73;
+        }
+        .accordion-icon {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 300;
+            font-size: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            margin-left: 1rem;
+        }
+        .rotate-45 {
+            transform: rotate(45deg);
+        }
+        
+        /* Botón Instagram Premium (Escritorio) */
+        .instagram-btn {
+            background: #1C1917;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+        }
+        .instagram-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        /* Utilidades visuales */
+        .separator-line {
+            width: 1px;
+            height: 40px;
+            background-color: #1C1917;
+            margin: 0 auto 1.5rem auto;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="selection:bg-luxury-accent selection:text-white">
 
-    <!-- Contenedor principal -->
-    <div class="container mx-auto px-6 py-8">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-luxury-bg/90 backdrop-blur-md border-b border-black/5 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-xl font-serif font-bold tracking-tight z-50 relative">sam & mel</a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-12 text-sm font-medium tracking-wide uppercase text-luxury-muted">
+                    <a href="#inicio" class="hover:text-luxury-text transition-colors">Inicio</a>
+                    <a href="#portafolio" class="hover:text-luxury-text transition-colors">Proyectos</a>
+                    <a href="#contacto" class="hover:text-luxury-text transition-colors">Contacto</a>
+                </div>
 
-        <!-- Header y Navegación -->
-        <header class="flex justify-between items-center mb-16 md:mb-24">
-            <h3 class="text-2xl font-bold">sam & mel</h3>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#inicio" class="nav-link text-lg">Inicio</a>
-                <a href="#portafolio" class="nav-link text-lg">Portfolio</a>
-                <a href="#contacto" class="nav-link text-lg">Contacto</a>
-            </nav>
-        </header>
-
-        <!-- Sección Hero -->
-        <section id="inicio" class="text-center mb-16 md:mb-24">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4">Experiencias Digitales</h1>
-            <p class="text-xl md:text-2xl italic flourish">Donde las ideas cobran vida en la web</p>
-            <div class="max-w-3xl mx-auto mt-12 text-lg leading-relaxed">
-                <p>Bienvenido a mi espacio en internet. Un café digital para el alma creativa, donde el diseño se fusiona con la funcionalidad, las ideas se transforman en sitios web memorables y cada línea de código se escribe con intención.</p>
-                <p class="mt-4">Ponete cómodo y explorá algunos de los proyectos en los que tuve el placer de trabajar.</p>
+                <!-- Mobile Hamburger Button -->
+                <button id="menu-btn" class="md:hidden text-2xl text-luxury-text z-50 focus:outline-none">
+                    <span id="menu-icon">&equiv;</span>
+                </button>
             </div>
-        </section>
 
-        <!-- Sección Portafolio con Acordeón -->
-        <section id="portafolio">
-            <h2 class="text-center text-4xl font-bold mb-12">Últimos Proyectos</h2>
-            <div id="portfolio-accordion" class="max-w-4xl mx-auto space-y-4">
-                <!-- Los items del acordeón se insertarán aquí con JavaScript -->
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="md:hidden bg-luxury-bg border-t border-black/5 mt-4">
+                <div class="flex flex-col space-y-4 py-6 text-center text-sm font-medium tracking-wide uppercase text-luxury-muted">
+                    <a href="#inicio" class="mobile-link hover:text-luxury-text transition-colors py-2">Inicio</a>
+                    <a href="#portafolio" class="mobile-link hover:text-luxury-text transition-colors py-2">Proyectos</a>
+                    <a href="#contacto" class="mobile-link hover:text-luxury-text transition-colors py-2">Contacto</a>
+                </div>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <!-- Sección Contacto -->
-        <section id="contacto" class="mt-16 md:mt-24 max-w-3xl mx-auto text-center p-8 md:p-12 bg-white/20 rounded-lg">
-             <div class="flex justify-center mb-4">
-                <span class="text-3xl">⁂</span>
-             </div>
-            <h2 class="text-3xl font-bold mb-4">Hablemos de tu Proyecto</h2>
-            <p class="mb-8 text-lg">¿Tenés una idea en mente? Me encantaría escucharla. Mandame un mensaje y empecemos a crear algo increíble juntos.</p>
-            <a href="https://wa.me/5491173666512" target="_blank" rel="noopener noreferrer" class="inline-block vintage-bg-accent-dark text-white px-8 py-3 rounded-md hover:bg-[#4A443F] transition-colors font-semibold">
-                Chatear por WhatsApp
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-[85vh] flex flex-col justify-center items-center text-center px-6 pt-28 pb-12 relative overflow-hidden">
+        <!-- Elemento decorativo sutil -->
+        <div class="absolute top-1/4 left-10 w-64 h-64 bg-luxury-accent/5 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-gray-200/20 rounded-full blur-3xl -z-10"></div>
+
+        <div class="fade-in-up w-full max-w-4xl">
+            <div class="separator-line"></div>
+            <span class="text-luxury-accent uppercase tracking-[0.2em] text-xs font-semibold mb-6 block">Estudio Digital</span>
+            
+            <!-- Título ajustado para móvil -->
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-medium leading-[1.1] mb-6 text-luxury-text">
+                Creando <br><i class="font-serif italic text-luxury-accent">Proyectos</i> Digitales.
+            </h1>
+            
+            <p class="max-w-xl mx-auto text-base md:text-xl text-luxury-muted font-light leading-relaxed mb-10 px-4">
+                Creamos espacios web que respiran. Diseño intencional para terapeutas, editoriales y marcas que valoran la esencia.
+            </p>
+            
+            <!-- Botones de Acción (CTAs) -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full px-4">
+                <a href="#portafolio" class="w-full sm:w-auto bg-luxury-text text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-luxury-accent transition-colors shadow-lg">
+                    Ver Portfolio
+                </a>
+                <a href="https://wa.me/5491173666512" target="_blank" class="w-full sm:w-auto border border-luxury-text text-luxury-text px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-luxury-bg hover:text-luxury-accent transition-colors">
+                    Consultar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Portafolio -->
+    <section id="portafolio" class="py-20 px-4 md:px-12 bg-white rounded-t-[2.5rem] shadow-[0_-20px_60px_-15px_rgba(0,0,0,0.03)]">
+        <div class="container mx-auto max-w-5xl">
+            
+            <!-- Salud -->
+            <div class="mb-16 fade-in-up">
+                <span class="text-luxury-accent uppercase tracking-widest text-xs font-bold block mb-3 pl-2">Categoría</span>
+                <h2 class="text-3xl md:text-5xl font-serif mb-6 pl-2">Salud & Bienestar</h2>
+                <div id="health-accordion">
+                    <!-- Items inyectados por JS -->
+                </div>
+            </div>
+
+            <!-- Editorial -->
+            <div class="mb-16 fade-in-up">
+                <span class="text-luxury-accent uppercase tracking-widest text-xs font-bold block mb-3 pl-2">Categoría</span>
+                <h2 class="text-3xl md:text-5xl font-serif mb-6 pl-2">Editorial & Cultura</h2>
+                <div id="editorial-accordion">
+                    <!-- Items inyectados por JS -->
+                </div>
+            </div>
+
+            <!-- Moda -->
+            <div class="mb-16 fade-in-up">
+                <span class="text-luxury-accent uppercase tracking-widest text-xs font-bold block mb-3 pl-2">Categoría</span>
+                <h2 class="text-3xl md:text-5xl font-serif mb-6 pl-2">Moda & Alta Costura</h2>
+                <div id="fashion-accordion">
+                    <!-- Items inyectados por JS -->
+                </div>
+            </div>
+
+            <!-- Agro -->
+            <div class="mb-16 fade-in-up">
+                <span class="text-luxury-accent uppercase tracking-widest text-xs font-bold block mb-3 pl-2">Categoría</span>
+                <h2 class="text-3xl md:text-5xl font-serif mb-6 pl-2">Agro & Negocios</h2>
+                <div id="commercial-accordion">
+                    <!-- Items inyectados por JS -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="py-24 px-6 bg-luxury-bg text-center">
+        <div class="container mx-auto max-w-2xl fade-in-up">
+            <h2 class="text-4xl md:text-6xl font-serif mb-6">¿Empezamos?</h2>
+            <p class="text-lg text-luxury-muted font-light mb-10">
+                Cada gran proyecto comienza con una conversación honesta. Contanos tu idea.
+            </p>
+            <a href="https://wa.me/5491173666512" target="_blank" class="inline-block w-full sm:w-auto bg-luxury-text text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-luxury-accent transition-colors shadow-soft hover:shadow-lg">
+                Iniciar Chat en WhatsApp
             </a>
-        </section>
+        </div>
+    </section>
 
-        <!-- Footer -->
-        <footer class="text-center mt-16 md:mt-24 py-6 border-t border-[#4A443F]/20">
-            <p>&copy; 2025 sam & mel. Creado con dedicación y nostalgia.</p>
-        </footer>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-black/5 py-12 mb-16 md:mb-0">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <p class="text-luxury-text font-serif text-lg font-bold">sam & mel</p>
+            <p class="text-luxury-muted text-sm">&copy; 2025. Diseñado en Buenos Aires.</p>
+        </div>
+    </footer>
 
+    <!-- Barra de Acción Móvil Fija (Sticky Bottom Bar) -->
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 p-4 md:hidden z-50 flex justify-between items-center shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+        <div class="flex flex-col">
+            <span class="text-xs text-luxury-muted font-bold tracking-wider uppercase">¿Consultas?</span>
+            <span class="text-sm font-serif text-luxury-text">Hablemos ahora</span>
+        </div>
+        <a href="https://wa.me/5491173666512" target="_blank" class="bg-[#25D366] text-white px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+            WhatsApp
+        </a>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const projects = [
-                 {
-                    title: "Sitio Web para Psicóloga",
-                    author: "Ornella D'Alicandro",
-                    fullDescription: "Se creó una plataforma web completa para la Lic. Ornella D'Alicandro, enfocada en presentar sus servicios de psicología de manera clara y accesible. El diseño prioriza una navegación intuitiva y una atmósfera de calma y confianza, elementos clave para su área profesional. Se incluyó una sección de contacto optimizada para facilitar la solicitud de turnos.",
-                    liveUrl: "https://www.psicologaornelladalicandro.com.ar/"
-                },
-                {
-                    title: "Sitio Web para Psicóloga",
-                    author: "Melina Najum",
-                    fullDescription: "Para la Lic. Melina Najum, se desarrolló un sitio web que refleja su enfoque profesional y humano. La estructura fue diseñada para ser limpia y fácil de navegar, permitiendo a los visitantes encontrar información sobre sus servicios y contactarla de forma sencilla. El objetivo principal fue construir un espacio digital que genere confianza y facilite el primer paso para la terapia.",
-                    liveUrl: "https://www.licmelinanajum.com.ar/"
-                },
-                {
-                    title: "Sitio Web para Psicólogo",
-                    author: "Rodrigo Panal",
-                    fullDescription: "Se implementó un sitio web completo para el Lic. Rodrigo Panal, diseñado para comunicar eficazmente su propuesta profesional en el ámbito de la psicología. Se buscó un diseño claro y una navegación sencilla para que los pacientes puedan conocer sus especialidades, acceder a recursos y contactarse fácilmente. La plataforma refuerza su presencia digital y profesionalismo.",
-                    liveUrl: "https://www.rodrigopanal.com.ar/"
-                },
-                {
-                    title: "Sitio Web para Psicóloga",
-                    author: "Lali Boldrini",
-                    fullDescription: "Se diseñó y desarrolló un sitio web para la Lic. Lali Boldrini con el objetivo de crear una presencia digital profesional y cercana. La web presenta sus servicios, su enfoque terapéutico y facilita un canal de comunicación directo para los interesados en iniciar un proceso de terapia, todo dentro de un diseño que transmite serenidad y confianza.",
-                    liveUrl: "https://www.psicologa-laliboldrini.com.ar/"
-                },
-                {
-                    title: "Sitio Web para Psicólogo y Equipo",
-                    author: "Alejandro Tondelli & Equipo",
-                    fullDescription: "Se desarrolló un sitio web integral para el Lic. Alejandro Tondelli y su equipo. El objetivo fue crear un espacio profesional que no solo presente los perfiles y especialidades de cada terapeuta, sino que también ofrezca un recurso informativo para los visitantes. La web facilita el contacto y la gestión de consultas, consolidando la presencia digital del equipo.",
-                    liveUrl: "https://www.xn--licalejandrotondelli-psiclogo-k3c.com.ar/"
-                },
-                {
-                    title: "Sitio Web para Psicóloga",
-                    author: "Vanesa Bustos",
-                    fullDescription: "Se desarrolló una plataforma web para la Lic. Vanesa Bustos con el fin de crear un espacio digital que refleje su profesionalismo. El sitio presenta de forma clara sus servicios, su enfoque de trabajo y proporciona un canal de contacto directo y accesible para quienes buscan acompañamiento psicológico, fortaleciendo su presencia online.",
-                    liveUrl: "https://www.vanebustospsicologa.com.ar/"
-                },
-                {
-                    title: "Sitio Web para Equipo de Psicólogas",
-                    author: "Psicotidiana",
-                    fullDescription: "Desarrollo de un portal web para Psicotidiana, un equipo de psicólogas. El sitio fue concebido para ser un espacio acogedor y profesional, presentando al equipo y sus especialidades. Se implementó una arquitectura clara para facilitar el acceso a la información y promover el contacto de nuevos pacientes, consolidando su identidad digital como equipo.",
-                    liveUrl: "https://www.psicotidiana.com.ar/"
-                },
-                {
-                    title: "Sitio Web para Numeróloga y Tarotista",
-                    author: "MF Arcano",
-                    fullDescription: "Creación de un espacio web místico y profesional para MF Arcano, dedicado a la numerología y el tarot. El diseño busca transmitir la esencia esotérica de sus servicios, ofreciendo a los visitantes una experiencia inmersiva y clara para explorar sus lecturas y contactarla. La plataforma se optimizó para ser un canal directo y confiable para sus consultantes.",
-                    liveUrl: "https://www.mfarcano.com.ar/"
-                },
-            ];
-
-            const portfolioAccordion = document.getElementById('portfolio-accordion');
-
-            if (portfolioAccordion) {
-                projects.forEach(project => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'accordion-item border border-[#4A443F]/10 rounded-lg overflow-hidden bg-[#FDFBF8] shadow-sm';
-                    
-                    itemDiv.innerHTML = `
-                        <button class="accordion-toggle w-full flex justify-between items-center text-left p-6 hover:bg-[#4A443F]/5 focus:outline-none transition-colors">
-                            <span class="text-xl font-bold">${project.author}</span>
-                            <span class="accordion-icon text-2xl vintage-accent transform transition-transform duration-300">+</span>
-                        </button>
-                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                            <div class="p-6 border-t border-[#4A443F]/10">
-                                <h4 class="text-lg font-bold mb-2 text-[#4A443F]">${project.title}</h4>
-                                <p class="mb-4 text-base leading-relaxed text-[#4A443F]/90">${project.fullDescription}</p>
-                                <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 vintage-bg-accent-dark text-white px-5 py-2 rounded-md hover:bg-[#4A443F] transition-colors font-semibold text-sm">
-                                    Visitar Sitio Web &rarr;
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                    portfolioAccordion.appendChild(itemDiv);
-                });
-
-                portfolioAccordion.addEventListener('click', (e) => {
-                    const toggleBtn = e.target.closest('.accordion-toggle');
-                    if (!toggleBtn) return;
-
-                    const currentItem = toggleBtn.closest('.accordion-item');
-                    const content = toggleBtn.nextElementSibling;
-                    const icon = toggleBtn.querySelector('.accordion-icon');
-                    const isExpanded = currentItem.classList.contains('expanded');
-
-                    // Cerrar todos los demás items
-                    const allItems = portfolioAccordion.querySelectorAll('.accordion-item');
-                    allItems.forEach(item => {
-                        if (item !== currentItem) {
-                            item.classList.remove('expanded');
-                            item.querySelector('.accordion-content').style.maxHeight = null;
-                            item.querySelector('.accordion-icon').classList.remove('rotate-45');
-                        }
-                    });
-
-                    // Abrir o cerrar el item actual
-                    if (isExpanded) {
-                        currentItem.classList.remove('expanded');
-                        content.style.maxHeight = null;
-                        icon.classList.remove('rotate-45');
-                    } else {
-                        currentItem.classList.add('expanded');
-                        content.style.maxHeight = content.scrollHeight + "px";
-                        icon.classList.add('rotate-45');
-                    }
-                });
-            }
-        });
-    </script>
-
-    <!-- Botón flotante de Instagram -->
-    <a href="https://www.instagram.com/sam_mel_90/" target="_blank" rel="noopener noreferrer" class="instagram-float shadow-lg">
-        <svg class="w-8 h-8 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+    <!-- Botón Flotante Instagram (Escritorio) -->
+    <a href="https://www.instagram.com/sam_mel_90/" target="_blank" rel="noopener noreferrer" class="hidden md:flex instagram-btn fixed bottom-8 right-8 w-14 h-14 rounded-full items-center justify-center z-50">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 448 512">
             <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
         </svg>
     </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- MENU MÓVIL ---
+            const menuBtn = document.getElementById('menu-btn');
+            const menuIcon = document.getElementById('menu-icon');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            menuBtn.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.contains('open');
+                if (isOpen) {
+                    mobileMenu.classList.remove('open');
+                    menuIcon.innerHTML = '&equiv;';
+                } else {
+                    mobileMenu.classList.add('open');
+                    menuIcon.innerHTML = '&times;';
+                }
+            });
+
+            // Cerrar menú al hacer click en un enlace
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    menuIcon.innerHTML = '&equiv;';
+                });
+            });
+            
+            // --- DATOS DE PROYECTOS ---
+            const healthProjects = [
+                 {
+                    title: "Sitio Web Institucional",
+                    client: "Lic. Ornella D'Alicandro",
+                    description: "Diseño minimalista enfocado en la calma y la confianza del paciente. Navegación intuitiva y gestión de turnos.",
+                    url: "https://www.psicologaornelladalicandro.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Portal Profesional",
+                    client: "Lic. Melina Najum",
+                    description: "Estrategia digital para fortalecer la marca personal. Diseño limpio con enfoque en la conversión de pacientes.",
+                    url: "https://www.licmelinanajum.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Web & Identidad",
+                    client: "Lic. Rodrigo Panal",
+                    description: "Desarrollo web corporativo que comunica solidez profesional. Optimizado para dispositivos móviles.",
+                    url: "https://www.rodrigopanal.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Plataforma Terapéutica",
+                    client: "Lic. Lali Boldrini",
+                    description: "Un espacio digital sereno. Diseño UX/UI centrado en reducir la ansiedad del usuario al navegar.",
+                    url: "https://www.psicologa-laliboldrini.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Espacio Terapéutico",
+                    client: "Puentes al Alma",
+                    description: "Diseño web que transmite serenidad y conexión. Un puente digital accesible para el encuentro terapéutico.",
+                    url: "https://puentesalalmapsiconmr.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Consultorio Digital",
+                    client: "Lic. Valeria Alexander",
+                    description: "Diseño web que refleja profesionalismo y empatía. Un espacio digital claro para conectar con pacientes.",
+                    url: "https://valeriaalexander.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Web de Equipo",
+                    client: "Lic. A. Tondelli & Equipo",
+                    description: "Arquitectura de información compleja simplificada para un equipo multidisciplinario.",
+                    url: "https://www.xn--licalejandrotondelli-psiclogo-k3c.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Presencia Digital",
+                    client: "Lic. Vanesa Bustos",
+                    description: "Diseño responsive de alto rendimiento. Enfoque en accesibilidad y velocidad de carga.",
+                    url: "https://www.vanebustospsicologa.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Portal de Equipo",
+                    client: "Psicotidiana",
+                    description: "Branding digital y desarrollo web para colectivo de psicólogas. Estética cálida y acogedora.",
+                    url: "https://www.psicotidiana.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Web Esotérica",
+                    client: "MF Arcano",
+                    description: "Diseño atmosférico para numerología y tarot. Uso de tipografías expresivas y layouts inmersivos.",
+                    url: "https://www.mfarcano.com.ar/",
+                    year: "2025"
+                },
+            ];
+
+            const editorialProjects = [
+                {
+                    title: "E-commerce & Catálogo",
+                    client: "Blackbeard Editorial",
+                    description: "Experiencia de compra editorial. Diseño sofisticado que pone el foco en las portadas y los autores.",
+                    url: "https://blackbeardeditorial.com.ar/",
+                    year: "2025"
+                }
+            ];
+
+            const fashionProjects = [
+                {
+                    title: "Atelier Online",
+                    client: "Mariana Alexander",
+                    description: "Diseño web etéreo y visual. Una vitrina digital inmersiva que refleja la delicadeza, el detalle y la exclusividad de la alta costura.",
+                    url: "https://marianaalexander.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Diseño de Autor",
+                    client: "Maria Lihuen",
+                    description: "Alta costura y diseño exclusivo. Una plataforma elegante que destaca la sofisticación y el arte del buen vestir.",
+                    url: "https://marialihuen.com.ar/",
+                    year: "2025"
+                },
+                {
+                    title: "Vestuario & Fantasía",
+                    client: "Maria Lihuen Disfraces",
+                    description: "Donde la fantasía encuentra la calidad. Un catálogo visual de disfraces de alta confección y diseño artesanal.",
+                    url: "https://disfracesmarialihuen.com.ar/",
+                    year: "2025"
+                }
+            ];
+
+            const commercialProjects = [
+                {
+                    title: "Web Comercial",
+                    client: "Granja Soy Chu J Cesar",
+                    description: "Conectando el campo con la ciudad. Una plataforma digital que facilita el acceso a productos frescos, priorizando la cercanía y la gestión ágil de pedidos.",
+                    url: "https://granjasoychujcesar.com.ar/",
+                    year: "2025"
+                }
+            ];
+
+            // --- RENDERIZADO DEL ACORDEÓN PREMIUM ---
+            function renderPremiumAccordion(projects, containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                projects.forEach(project => {
+                    const item = document.createElement('div');
+                    item.className = 'accordion-item';
+                    
+                    item.innerHTML = `
+                        <div class="accordion-toggle group">
+                            <div class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-8 flex-grow">
+                                <span class="text-xl md:text-3xl font-serif text-luxury-text group-hover:pl-4 transition-all duration-300">${project.client}</span>
+                                <span class="text-[10px] font-sans uppercase tracking-widest text-luxury-muted">${project.title}</span>
+                            </div>
+                            <span class="accordion-icon text-luxury-muted group-hover:text-luxury-accent text-2xl">+</span>
+                        </div>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                            <div class="pb-8 pt-2 pl-0 md:pl-4 max-w-2xl">
+                                <p class="text-luxury-muted text-base md:text-lg font-light leading-relaxed mb-6">${project.description}</p>
+                                <div class="flex items-center gap-6">
+                                    <a href="${project.url}" target="_blank" class="inline-block bg-luxury-text text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-luxury-accent transition-colors">
+                                        Visitar Sitio Web
+                                    </a>
+                                    <span class="text-xs text-luxury-muted/50">${project.year}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(item);
+                });
+            }
+
+            renderPremiumAccordion(healthProjects, 'health-accordion');
+            renderPremiumAccordion(editorialProjects, 'editorial-accordion');
+            renderPremiumAccordion(fashionProjects, 'fashion-accordion');
+            renderPremiumAccordion(commercialProjects, 'commercial-accordion');
+
+            // --- LÓGICA DE INTERACCIÓN ---
+            document.addEventListener('click', (e) => {
+                const toggle = e.target.closest('.accordion-toggle');
+                if (!toggle) return;
+
+                const currentItem = toggle.parentElement;
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('.accordion-icon');
+                const isExpanded = icon.classList.contains('rotate-45');
+
+                // Cerrar hermanos
+                const parent = currentItem.parentElement;
+                parent.querySelectorAll('.accordion-item').forEach(item => {
+                    if (item !== currentItem) {
+                        const otherIcon = item.querySelector('.accordion-icon');
+                        const otherContent = item.querySelector('.accordion-content');
+                        if (otherIcon) otherIcon.classList.remove('rotate-45');
+                        if (otherContent) otherContent.style.maxHeight = null;
+                        if (otherIcon) otherIcon.textContent = "+";
+                    }
+                });
+
+                // Toggle actual
+                if (isExpanded) {
+                    content.style.maxHeight = null;
+                    icon.classList.remove('rotate-45');
+                    icon.textContent = "+";
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.classList.add('rotate-45');
+                    icon.textContent = "−"; 
+                }
+            });
+
+            // --- OBSERVER PARA ANIMACIONES DE SCROLL ---
+            const observerOptions = { threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
-
 
 
 
